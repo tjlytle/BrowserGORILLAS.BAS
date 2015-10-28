@@ -19,6 +19,7 @@ JSON.stringify = JSON.stringify || function (obj) {
 	}
 };
 
+var api;
 
 $(document).ready(function() {
 	var buildings = [];
@@ -261,7 +262,7 @@ $(document).ready(function() {
 		},
 		throwBanana: function() {
 			if (control.throwing) { return; }
-		  control.throwing = true;
+		    control.throwing = true;
 			
 			var $p = $('#player' + this.turn);
 			var ang = players[control.turn].ang * Math.PI / 180; // deg -> rad
@@ -290,7 +291,7 @@ $(document).ready(function() {
 			var banana_frame = t == 1 ? 1 : 4;
 			clearInterval(this.animateInterval);
 		
-		  sound.play('throw');
+		    sound.play('throw');
 		
 		
 			this.animateInterval = setInterval(function() {
@@ -571,10 +572,8 @@ $(document).ready(function() {
 		},
 		init: function() {
 			
-			if (confirm("Would you like to play online against someone?  Click OK, to play online, or Cancel to play locally only.")) {
-				control.localGame = false
-			}
-			
+			control.localGame = true;
+
 			$player1.addClass('gorilla').attr('id', 'player1');
 			$player2.addClass('gorilla').attr('id', 'player2');
 			$sun.addClass('sun');
@@ -668,8 +667,11 @@ $(document).ready(function() {
 			
 		}
 	}; // control
-	
+
+	api = control;
+
 	control.init();
 	control.start();
 	
 });
+

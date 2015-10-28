@@ -1,0 +1,9 @@
+{
+  "minimum-stability": "dev",
+  "require": {
+    "pubnub/pubnub": "dev-master",
+    "fillup/nexmo": "dev-master",
+    "guzzlehttp/guzzle-services": "0.5.0",
+    "guzzlehttp/command":  "0.7.1"
+  }
+}
