@@ -22,7 +22,7 @@ $config = include __DIR__ . '/../init.php';
 					if(!text){
 						text = '';
 					}
-					$('#prompt').html('SMS an angle (1-90) and a velocity (1-100) to <?php echo $config['nexmo']['from'] ?>. ' + text)
+					$('#prompt').html('SMS an angle (1-90) and a velocity (1-100) to <?php echo $config['number'] ?>. ' + text)
 				};
 
 				pubnub = PUBNUB({
