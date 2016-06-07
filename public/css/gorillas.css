@@ -14,6 +14,22 @@ body {
 	color: #fff;
 	font-family: arial, verdana, tahoma, sans-serif;
 }
+#queue {
+	zoom: 2; -moz-transform: scale(2); -moz-transform-origin: 0 0;
+	top: 0px;
+	left: 0px;
+	width: 135px;
+	position: absolute;
+	padding: 5px;
+}
+#leader{
+	zoom: 2; -moz-transform: scale(2); -moz-transform-origin: 0 0;
+	top: 0px;
+	left: 775px;
+	xwidth: 135px;
+	position: absolute;
+	padding: 5px;
+}
 #game {
 	zoom: 2; -moz-transform: scale(2); -moz-transform-origin: 0 0;
 	background-color: #0402ac;

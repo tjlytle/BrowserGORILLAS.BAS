@@ -202,13 +202,8 @@ $(document).ready(function() {
 			
 			players[1].$velInfo.html(players[1].vel);
 			players[1].$angInfo.html(players[1].ang);
-			players[1].$score.html(players[1].score);
 			players[2].$velInfo.html(players[2].vel);
 			players[2].$angInfo.html(players[2].ang);
-			players[2].$score.html(players[2].score);
-			
-			$('#angSlider').slider('value', players[this.turn].ang);
-			$('#velSlider').slider('value', players[this.turn].vel);
 		},
 		setVel: function(player, val) {
 			var who = player == 1 ? 1 : 2;
@@ -248,7 +243,7 @@ $(document).ready(function() {
 			$('#info' + this.turn).removeClass('active');
 			this.turn = this.turn == 1 ? 2 : 1;
 			$('#info' + this.turn).addClass('active');
-			
+
 			if (control.random) {
 				this.setVel(this.turn, Math.floor((Math.random() * 70) + 20));
 				this.setAng(this.turn, Math.floor((Math.random() * 80) + 10));
@@ -258,6 +253,10 @@ $(document).ready(function() {
 			
 			if (control.random) {
 				this.throwBanana();
+			}
+
+			if (this.nextTurnCallback && typeof(this.nextTurnCallback) === "function") {
+				this.nextTurnCallback();
 			}
 		},
 		throwBanana: function() {
@@ -428,6 +427,10 @@ $(document).ready(function() {
 			}, 100);	
 		},
 		celebrate: function(ape) {
+			if (this.winCallback && typeof(this.winCallback) === "function") {
+				this.winCallback(ape);
+			}
+
 			var first = true;
 			var count = 0;
 			sound.play('chest-thump');
@@ -461,7 +464,7 @@ $(document).ready(function() {
 					control.setAng(control.turn, ui.value);
 				}
 			});
-			
+
 			$('#velSlider').slider({
 				min: 1,
 				max: 100,
@@ -470,12 +473,12 @@ $(document).ready(function() {
 					control.setVel(control.turn, ui.value);
 				}
 			});
-			
+
 			$('#throw').click(function(e) {
 				control.throwBanana();
 				e.preventDefault();
 			});
-			
+
 			$('body').keydown(function(e) {
 				//console.log(e.keyCode);
 				if (typeof keys[e.keyCode] != 'undefined') {
@@ -485,7 +488,7 @@ $(document).ready(function() {
 							control.throwBanana();
 						}
 					}
-					
+
 					if (!control.throwing) {
 						switch (keys[e.keyCode]) {
 							case 'leftArrow':
@@ -571,7 +574,6 @@ $(document).ready(function() {
 			return level_obj;
 		},
 		init: function() {
-			
 			control.localGame = true;
 
 			$player1.addClass('gorilla').attr('id', 'player1');
@@ -591,12 +593,9 @@ $(document).ready(function() {
 			
 			var lvl = control.generateLevel()
 			
-			
 			var continueSetup = function() {
 				control.registerListeners();
-				
 				control.setInfo();
-				
 				control.setupLevel(lvl);
 			};
 			
@@ -605,6 +604,12 @@ $(document).ready(function() {
 			} else {
 				control.submitLevel(lvl, continueSetup);
 			}
+		},
+		onWin: function(callback){
+			this.winCallback = callback;
+		},
+		onNextTurn: function(callback){
+			this.nextTurnCallback = callback;
 		},
 		sendRequest: function(method, payload, callback) {
 			if (typeof callback != 'function') {
