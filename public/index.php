@@ -22,7 +22,7 @@ $config = include __DIR__ . '/../init.php';
 					if(!text){
 						text = '';
 					}
-					$('#prompt').html('SMS an angle (1-90) and a velocity (1-100) to <?php echo $config['number'] ?>. ' + text)
+					$('#prompt').html('SMS an angle (1-90) and a speed (1-100) to <?php echo $config['number'] ?>. ' + text)
 				};
 
 				pubnub = PUBNUB({
@@ -60,7 +60,7 @@ $config = include __DIR__ . '/../init.php';
 				<span class="name active">Player 1</span><br/>
 				<div class="launch">
 					<span class="label">Angle:</span> <span class="angle">45</span><br/>
-					<span class="label">Velocity:</span> <span class="velocity">50</span><br/>
+					<span class="label">Speed:</span> <span class="velocity">50</span><br/>
 					<span class="label">Score:</span> <span class="score">0</span>
 				</div>
 			</div>
@@ -69,7 +69,7 @@ $config = include __DIR__ . '/../init.php';
 				<span class="name">Player 2</span><br/>
 				<div class="launch">
 					<span class="label">Angle:</span> <span class="angle">45</span><br/>
-					<span class="label">Velocity:</span> <span class="velocity">50</span><br/>
+					<span class="label">Speed:</span> <span class="velocity">50</span><br/>
 					<span class="label">Score:</span> <span class="score">0</span>
 				</div>
 			</div>
